@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Lobby
+  m_EditorClassIdentifier: 
+  m_GroupName: Lobby
+  m_GUID: 9677f00d2f0a2e34a838e23461b4cbb6
+  m_SerializeEntries:
+  - m_GUID: 00f9670e0be190a4ea77678ac19ed0c5
+    m_Address: Assets/Develop/Lobby/Lobby.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0be40c8b169ce9943a2fd047b00eda14
+    m_Address: Assets/Develop/Lobby/LobbyHomePart/LobbyHomePartPanel.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 15b0cee862ad44444ba4423220a26ca3
+    m_Address: Assets/Develop/Lobby/MenuPart/Sprite/gold.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 20aa8d417538fbf4e95151dd40dbbca8
+    m_Address: Assets/Develop/Lobby/SettingPart/SettingPartPanel.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 84dcd198b17b1ca44b3700583a7fe544
+    m_Address: Assets/Develop/Lobby/MenuPart/MenuPartPanel.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: b69e5c8cd16a5d6449a26cce12baa1d3, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 1e6af87d951823f4b9203e938ad27892, type: 2}
+    - {fileID: 11400000, guid: 8fad736941f589e49b4afcf9e4fc0a67, type: 2}

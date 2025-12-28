@@ -1,0 +1,14 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 0
+    path: Assets/Develop/Lobby/Lobby.unity
+    guid: 00f9670e0be190a4ea77678ac19ed0c5
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: bf2b161652b00a8478865c5e3c59d42d, type: 2}
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  m_UseUCBPForAssetBundles: 0

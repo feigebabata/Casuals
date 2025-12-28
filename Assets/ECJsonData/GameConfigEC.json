@@ -1,0 +1,1 @@
+{"SubGames":{"Skiing":{"Id":"Skiing","Name":"滑雪","Description":"滑雪大冒险","Icon":"Assets/Develop/Lobby/LobbyHomePart/Sprite/icon.png","Type":"Skiing.SkiingPlay"}},"Items":{"Gold":{"Id":"Gold","Name":"金币","Description":"金币","Icon":"Assets/Develop/Lobby/MenuPart/Sprite/gold.png"}},"ItemTypeSingle":{"GlodItem":"Glod"}}
