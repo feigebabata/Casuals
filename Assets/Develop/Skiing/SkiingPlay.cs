@@ -40,6 +40,8 @@ namespace Skiing
         private void OnCreateEnd()
         {
             GetPart<MainPart>().Show();
+
+            TerrainComp.Init();
         }
 
     }

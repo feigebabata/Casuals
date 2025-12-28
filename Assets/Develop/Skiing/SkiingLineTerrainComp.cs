@@ -16,9 +16,11 @@ namespace Skiing
         public float Length = 20;//地形宽
         public float OffsetX;//位移X
         public float OffsetY;//位移Y
-        public float Speed = 10;
+        public float Velocity = 10;
         public float TurnWeight = 1000;//曲线宽
         public float TurnHeight = 1000;//曲线高
+        public float Gravity = -10;//重力
+        public float JumpVelocityWeight = 1;
 
         public Transform Target,CameraRoot;
         private Vector3[] Points,OffsetPoints;
@@ -36,20 +38,20 @@ namespace Skiing
         //     ResetAllPoint();
         // }
 
-        // void FixedUpdate()
-        // {
-        //     OffsetX = Speed * Time.time;
-        //     OffsetY = getPoint(0).y;
+        public void Step()
+        {
+            OffsetX += Velocity * Time.fixedDeltaTime;
+            OffsetY = getPoint(0).y;
             
-        //     ResetAllPoint();
+            ResetAllPoint();
 
-        //     var point = VectorHelper.Get2DPathPointByX(OffsetPoints,0);
-        //     var normal = VectorHelper.Get2DPathNormalByX(OffsetPoints,0);
+            var point = VectorHelper.Get2DPathPointByX(OffsetPoints,0);
+            var normal = VectorHelper.Get2DPathNormalByX(OffsetPoints,0);
 
-        //     Target.position = point;
-        //     Target.up = normal;
-        //     CameraRoot.position = point + new Vector3(0,0,-10);
-        // }
+            Target.position = point;
+            Target.up = normal;
+            CameraRoot.position = point + new Vector3(0,0,-10);
+        }
 
         void OnDrawGizmos()
         {
@@ -65,7 +67,7 @@ namespace Skiing
         }
 
 
-        void Init()
+        public void Init()
         {
             Points = new Vector3[PointCount.ti()];
             OffsetPoints = new Vector3[Points.Length];
@@ -74,7 +76,7 @@ namespace Skiing
             normalOffset = line.widthMultiplier/2;
         }
 
-        void ResetAllPoint()
+        public void ResetAllPoint()
         {
             var startPoint = getPoint(0);
             

@@ -51,16 +51,12 @@ namespace Skiing
         public void Show()
         {
             ShowPanel();
+            _play.TerrainComp.Step();
         }
 
         public void Hide()
         {
             HidePanel();
-        }
-
-        void OnClickPlayBtn()
-        {
-            
         }
 
         private void OnClickQuit()
@@ -70,6 +66,22 @@ namespace Skiing
             LobbyPlay.P.Messenger.Abort(LobbyPlayMsgId.OnClickQuit);
             _play.Destroy();
             LobbyPlay.P.GetPart<LobbyHomePart>().Show();
+        }
+
+        void OnClickPlayBtn()
+        {
+            HidePanel();
+
+            gameLoop().Start(this);
+        }
+
+        IEnumerator gameLoop()
+        {
+            while (true)
+            {
+                yield return new WaitForFixedUpdate();
+                _play.TerrainComp.Step();
+            }
         }
 
     }
