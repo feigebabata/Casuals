@@ -1,0 +1,3 @@
+[submodule "Assets/FGUFW"]
+	path = Assets/FGUFW
+	url = git@github.com:feigebabata/FGUFW.git
