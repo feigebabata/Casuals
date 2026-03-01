@@ -21,7 +21,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0be40c8b169ce9943a2fd047b00eda14
-    m_Address: Assets/Develop/Lobby/LobbyHomePart/LobbyHomePartPanel.prefab
+    m_Address: LobbyHomePartPanelComps
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -31,12 +31,12 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 20aa8d417538fbf4e95151dd40dbbca8
-    m_Address: Assets/Develop/Lobby/SettingPart/SettingPartPanel.prefab
+    m_Address: SettingPartPanelComps
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 84dcd198b17b1ca44b3700583a7fe544
-    m_Address: Assets/Develop/Lobby/MenuPart/MenuPartPanel.prefab
+    m_Address: MenuPartPanelComps
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

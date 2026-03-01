@@ -170,7 +170,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00012207031, y: 0.000059539783}
+  m_AnchoredPosition: {x: -0.00012207031, y: 400.00006}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &8123473214146810358
@@ -453,7 +453,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3466107374367021260}
   m_HandleRect: {fileID: 7607121735456455239}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -472,7 +472,6 @@ GameObject:
   - component: {fileID: 6143689000229419328}
   - component: {fileID: 5809010932068044538}
   - component: {fileID: 964796913707348347}
-  - component: {fileID: 6326841130394861921}
   - component: {fileID: 2674148859217874376}
   m_Layer: 0
   m_Name: LobbyHomePartPanel
@@ -509,7 +508,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2763420049047446089}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -577,40 +576,6 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 0
---- !u!114 &6326841130394861921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2763420049047446089}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db05915cd006e5b47b73376b84640e45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SwitingTime: 0
-  SwitingEffect: 1
-  AlphaCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  ScaleCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  MoveCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  MoveVector: {x: 0, y: 0}
-  SortOrder: Base
 --- !u!114 &2674148859217874376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1317,7 +1282,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7613433126398465826}
   m_HandleRect: {fileID: 4254170771175313922}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 0.5
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

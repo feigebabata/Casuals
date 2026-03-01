@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using ExcelConfig;
 using FGUFW;
 using LitJson;
@@ -9,14 +11,15 @@ public class GlobalConfig : MonoSingleton<GlobalConfig>
     public static GameConfigEC Configs => I.m_Configs;
     public GameConfigEC m_Configs;
 
+    private IAssetLoader assetLoader = new Addressable_AssetLoader();
+
     protected override bool IsDontDestroyOnLoad()=>true;
 
 
-    public IEnumerator Load()
+    public void Load()
     {
-        var loader = AssetHelper.LoadAsync<TextAsset>("Assets/ECJsonData/GameConfigEC.json");
-        yield return loader;
-        m_Configs = loader.Result.text.ToObject<GameConfigEC>();
-        yield return default;
+        var textAsset = AssetHelper.Load<TextAsset>("Assets/ECJsonData/GameConfigEC.json");
+        
+        m_Configs = textAsset.text.ToObject<GameConfigEC>();
     } 
 }

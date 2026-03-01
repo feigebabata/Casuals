@@ -1,63 +1,59 @@
 using System.Collections;
 using System.Collections.Generic;
-using FGUFW.MonoGameplay;
+using FGUFW.Gameplay;
 using UnityEngine;
 using FGUFW;
 using static FGUsing;
 
 namespace Lobby
 {
-    [UIPanelLoader("Assets/Develop/Lobby/SettingPart/SettingPartPanel.prefab",(int)UIPanelSortOrder.Upper2)]
     public partial class SettingPart : Part
     {
-        private LobbyPlay _play;
+        [Inject]
+        IOrderedMessenger<string> _orderedMessenger;
+
+        [Inject(InjectField.UI)]
         private SettingPartPanelComps _panelComps;
 
-        public override IEnumerator OnCreating(Part play,Part parent)
+        protected override void OnPartInitialed()
         {
-            _play = play as LobbyPlay;
-            yield return base.OnCreating(play,parent);
-        }
-
-        public override IEnumerator OnPreload()
-        {
-            yield return base.OnPreload();
-            _panelComps = _uiPanel.Comp<SettingPartPanelComps>();
             addListener();
         }
 
-        protected override void OnDispose()
+        protected override void OnPartDestroy()
         {
             removeListener();
-            base.OnDispose();
         }
 
         private void addListener()
         {
             _panelComps.TryAddAllBtnListener(this);
+
+            _orderedMessenger.Add(LobbyPlayMsgId.OpenSettingPart,Show);
         }
 
         private void removeListener()
         {
             _panelComps.TryRemoveAllBtnListener();
+
+            _orderedMessenger.Remove(LobbyPlayMsgId.OpenSettingPart,Show);
         }
 
         internal void Show()
         {
-            ShowPanel();
+            _panelComps.SetActive(true);
         }
 
         void OnClickCloseBtn()
         {
-            HidePanel();
+            _panelComps.SetActive(false);
         }
 
         void OnClickQuitBtn()
         {
-            HidePanel();
-            _play.Messenger.Broadcast(LobbyPlayMsgId.OnClickQuit);
+            OnClickCloseBtn();
+            _orderedMessenger.Broadcast(LobbyPlayMsgId.OnClickQuit);
         }
-
     }
 }
 

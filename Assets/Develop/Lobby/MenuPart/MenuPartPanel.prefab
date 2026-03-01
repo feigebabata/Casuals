@@ -390,7 +390,6 @@ GameObject:
   - component: {fileID: 7378357550867959998}
   - component: {fileID: 5397480259169955536}
   - component: {fileID: 1522253442363705546}
-  - component: {fileID: 4447595031779792340}
   - component: {fileID: 5286020993749407880}
   m_Layer: 0
   m_Name: MenuPartPanel
@@ -427,7 +426,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6588626838001857288}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -495,40 +494,6 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 0
---- !u!114 &4447595031779792340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6588626838001857288}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db05915cd006e5b47b73376b84640e45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SwitingTime: 0
-  SwitingEffect: 1
-  AlphaCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  ScaleCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  MoveCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  MoveVector: {x: 0, y: 0}
-  SortOrder: Upper
 --- !u!114 &5286020993749407880
 MonoBehaviour:
   m_ObjectHideFlags: 0

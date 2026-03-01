@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using FGUFW.MonoGameplay;
+using FGUFW.Gameplay;
 using UnityEngine;
 using FGUFW;
 using static FGUsing;
@@ -10,32 +10,32 @@ using Skiing;
 
 namespace Lobby
 {
-    [UIPanelLoader("Assets/Develop/Lobby/LobbyHomePart/LobbyHomePartPanel.prefab",(int)UIPanelSortOrder.Base)]
     public partial class LobbyHomePart : Part
     {
-        private LobbyPlay _play;
-        private LobbyHomePartPanelComps _panelComps;
+        [Inject(InjectField.Save)]
+        LobbyPlayConfig _lobbyPlayConfig;
 
-        public override IEnumerator OnCreating(Part play,Part parent)
+        [Inject(InjectField.UI)]
+        LobbyHomePartPanelComps _panelComps;
+
+        [Inject]
+        Table<string,ExcelConfig.GameConfigEC.SubGame> _subGameConfigs;
+
+        [Inject]
+        IAssetLoader _assetLoader;
+
+        protected override void OnPartInitialed()
         {
-            _play = play as LobbyPlay;
-            yield return base.OnCreating(play,parent);
-
-        }
-
-        public override IEnumerator OnPreload()
-        {
-            yield return base.OnPreload();
-            _panelComps = _uiPanel.Comp<LobbyHomePartPanelComps>();
             addListener();
 
             generateGameList();
+
+            Show();
         }
 
-        protected override void OnDispose()
+        protected override void OnPartDestroy()
         {
             removeListener();
-            base.OnDispose();
         }
 
         private void addListener()
@@ -50,10 +50,11 @@ namespace Lobby
 
         void OnClickPlayBtn()
         {
-            if(_play.SelfConfig.SelectGameId.IsNull())return;
+            if(_lobbyPlayConfig.SelectGameId.IsNull())return;
 
-            var data = GlobalConfig.Configs.SubGames[_play.SelfConfig.SelectGameId];
-            Part.Create(GetType().Assembly,data.Type).OnCreating(default,default).StartByGCS();
+            var data = _subGameConfigs[_lobbyPlayConfig.SelectGameId];
+            _assetLoader.LoadSceneAsync(data.ScenePath);
+
             Hide();
         }
 
@@ -64,39 +65,36 @@ namespace Lobby
             Screen.autorotateToLandscapeLeft = false;
             Screen.autorotateToLandscapeRight = false;
 
-            
-            loadSceneAsync("Assets/Develop/Lobby/Lobby.unity");
 
             GlobalLoading.I.Hide();
             
-            ShowPanel();
+            _panelComps.SetActive(true);
             resetGameListSelect();            
         }
 
         public void Hide()
         {
-            HidePanel();
+            _panelComps.SetActive(false);
+            
         }
 
         private void OnClickGameItem(PointerClicker clicker)
         {
-            _play.SelfConfig.SelectGameId = clicker.Data.Get<string>();
+            _lobbyPlayConfig.SelectGameId = clicker.Data.Get<string>();
             resetGameListSelect();
         }
 
         private void resetGameListSelect()
         {
-            var datas = GlobalConfig.Configs.SubGames;
-            _panelComps.ItemListRoot.Foreach(datas.Values,(Action<PointerClicker, ExcelConfig.GameConfigEC.SubGame>)((comp,data)=>
+            _panelComps.ItemListRoot.Foreach(_subGameConfigs.Values,(Action<PointerClicker, ExcelConfig.GameConfigEC.SubGame>)((comp,data)=>
             {
-                comp.GetChild(2).SetActive(_play.SelfConfig.SelectGameId == comp.Data.Get<string>());
+                comp.GetChild(2).SetActive(_lobbyPlayConfig.SelectGameId == comp.Data.Get<string>());
             }));
         }
 
         private void generateGameList()
         {
-            var datas = GlobalConfig.Configs.SubGames;
-            _panelComps.ItemListRoot.Foreach<PointerClicker,ExcelConfig.GameConfigEC.SubGame>(datas.Values,(comp,data)=>
+            _panelComps.ItemListRoot.Foreach<PointerClicker,ExcelConfig.GameConfigEC.SubGame>(_subGameConfigs.Values,(comp,data)=>
             {
                 comp.Data.Set(data.Id);
                 comp.GetChild<Image>(0).sprite = AssetHelper.Load<Sprite>(data.Icon);

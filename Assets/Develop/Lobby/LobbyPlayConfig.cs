@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using FGUFW.MonoGameplay;
+using FGUFW.Gameplay;
 using UnityEngine;
 using FGUFW;
 using static FGUsing;
@@ -8,44 +8,22 @@ using System;
 
 namespace Lobby
 {
-    public partial class LobbyPlay : Play<LobbyPlay>, IPartConfig
+    [Serializable]
+    public class LobbyPlayConfig
     {
-        [Serializable]
-        public class Config
+        public string SelectGameId;
+        public int Gold;
+
+        public int GetItemCount(string itemId)
         {
-            public string SelectGameId;
-            public int Gold;
+            int value = default;
 
-            public int GetItemCount(string itemId)
+            if(itemId == GlobalConfig.Configs.ItemTypeSingle.GlodItem)
             {
-                int value = default;
-
-                if(itemId == GlobalConfig.Configs.ItemTypeSingle.GlodItem)
-                {
-                    value = Gold;
-                }
-
-                return value;
+                value = Gold;
             }
-        }
 
-        public Config SelfConfig = new();
-
-        public object PartConfig 
-        { 
-            get
-            {
-                return SelfConfig;
-            }
-            set
-            {
-                SelfConfig = value as Config;
-            }
-        }
-
-        public Type GetPartConfigType()
-        {
-            return typeof(Config);
+            return value;
         }
     }
 }

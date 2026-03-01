@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using FGUFW.MonoGameplay;
+using FGUFW.Gameplay;
 using UnityEngine;
 using FGUFW;
 using static FGUsing;
@@ -8,41 +8,38 @@ using System;
 
 namespace Skiing
 {
-    public class SkiingPlay : Play<SkiingPlay>
+    public class SkiingPlay : Play
     {
-        public SkiingLineTerrainComp TerrainComp;
+        private SkiingLineTerrainComp _terrainComp;
 
-        public override IEnumerator OnCreating(Part play,Part parent)
+        [Inject]
+        private ILoadingUI _loadingUI;
+
+
+        protected override void OnPartInitialed()
         {
-            GlobalLoading.I.Show();
-            yield return loadSceneAsync("Assets/Develop/Skiing/Skiing.unity");
-            TerrainComp = findGO<SkiingLineTerrainComp>("Terrain");
-         
-            AddPart<MainPart>();   
-            yield return base.OnCreating(this,this);
+            _terrainComp = findGO<SkiingLineTerrainComp>("Terrain");
 
-            GlobalLoading.I.Hide();
+            _loadingUI.Hide();
             
             Screen.autorotateToPortrait = false;
             Screen.autorotateToPortraitUpsideDown = false;
             Screen.autorotateToLandscapeLeft = true;
             Screen.autorotateToLandscapeRight = true;
 
-            OnCreateEnd();
+            base.OnPartInitialed();
         }
 
-        protected override void OnDispose()
+        protected override void OnPartDestroy()
         {
-            base.OnDispose();
             
         }
 
-        private void OnCreateEnd()
+        protected override void OnAllPartInitialed()
         {
-            GetPart<MainPart>().Show();
-
-            TerrainComp.Init();
+            _terrainComp.Init();
         }
+
 
     }
 }

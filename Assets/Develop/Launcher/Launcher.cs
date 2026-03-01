@@ -1,16 +1,18 @@
 using System.Collections;
+using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using FGUFW;
-using FGUFW.MonoGameplay;
+using FGUFW.Gameplay;
 using Lobby;
 using UnityEngine;
 
 public class Launcher : MonoBehaviour
 {
-    IEnumerator Start()
+    void Start()
     {
         GlobalLoading.I.Show();
-        yield return GlobalConfig.I.Load();
-        Part.Create<LobbyPlay>(default).OnCreating(default,default).StartByGCS();
+
+        AssetHelper.LoadSceneAsync("Assets/Develop/Lobby/Lobby.unity");
     }
 
 #if UNITY_EDITOR

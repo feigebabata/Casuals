@@ -1,7 +1,8 @@
 namespace Lobby
 {
-    public enum LobbyPlayMsgId
+    public static class LobbyPlayMsgId
     {
-        OnClickQuit=0,
+        public const string  OnClickQuit = "LobbyPlayMsgId.OnClickQuit";
+        public const string  OpenSettingPart = "LobbyPlayMsgId.OpenSettingPart";
     }
 }

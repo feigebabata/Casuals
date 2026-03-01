@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using FGUFW.MonoGameplay;
+using FGUFW.Gameplay;
 using UnityEngine;
 using FGUFW;
 using static FGUsing;
@@ -10,29 +10,33 @@ using TMPro;
 
 namespace Lobby
 {
-    [UIPanelLoader("Assets/Develop/Lobby/MenuPart/MenuPartPanel.prefab",(int)UIPanelSortOrder.Upper)]
+    
     public partial class MenuPart : Part
     {
-        private LobbyPlay _play;
+        [Inject(InjectField.UI)]
         private MenuPartPanelComps _panelComps;
 
-        public override IEnumerator OnCreating(Part play,Part parent)
-        {
-            _play = play as LobbyPlay;
-            yield return base.OnCreating(play,parent);
-        }
+        [Inject]
+        private Table<string,ExcelConfig.GameConfigEC.Item> _itemConfigs;
 
-        public override IEnumerator OnPreload()
+        [Inject(InjectField.Save)]
+        LobbyPlayConfig _lobbyPlayConfig;
+
+        [Inject]
+        IOrderedMessenger<string> _orderedMessenger;
+
+        [Inject]
+        private IAssetLoader _assetLoader;
+
+        protected override void OnPartInitialed()
         {
-            yield return base.OnPreload();
-            _panelComps = _uiPanel.Comp<MenuPartPanelComps>();
             addListener();
+            Show();
         }
 
-        protected override void OnDispose()
+        protected override void OnPartDestroy()
         {
             removeListener();
-            base.OnDispose();
         }
 
         private void addListener()
@@ -47,28 +51,26 @@ namespace Lobby
 
         public void Show()
         {
-            ShowPanel();
+            _panelComps.SetActive(true);
 
             resetItemList();
         }
 
         void OnClickSettingBtn()
         {
-            _play.GetPart<SettingPart>().Show();
+            _orderedMessenger.Broadcast(LobbyPlayMsgId.OpenSettingPart);
         }
 
         private void resetItemList()
         {
-            var datas = GlobalConfig.Configs.Items.Values;
-            _panelComps.ItemList.Foreach<PointerClicker,ExcelConfig.GameConfigEC.Item>(datas,(comp,data)=>
+            _panelComps.ItemList.Foreach<PointerClicker,ExcelConfig.GameConfigEC.Item>(_itemConfigs.Values,(comp,data)=>
             {
-                comp.GetChild<Image>(0).sprite = load<Sprite>(data.Icon);
+                comp.GetChild<Image>(0).sprite = _assetLoader.Load<Sprite>(data.Icon);
                 comp.GetChild<Image>(0).SetSizeFlexibleHeight();
 
-                comp.GetChild<TMP_Text>(1).text = _play.SelfConfig.GetItemCount(data.Id).ts();
+                comp.GetChild<TMP_Text>(1).text = _lobbyPlayConfig.GetItemCount(data.Id).ts();
             });
         }
-
     }
 }
 

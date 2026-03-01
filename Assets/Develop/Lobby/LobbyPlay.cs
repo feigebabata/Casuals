@@ -1,38 +1,46 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using FGUFW.MonoGameplay;
+using FGUFW.Gameplay;
 using UnityEngine;
 using FGUFW;
-using static FGUsing;
 using System;
 
 namespace Lobby
 {
-    public partial class LobbyPlay : Play<LobbyPlay>
+    public partial class LobbyPlay : Play
     {
-        public override IEnumerator OnCreating(Part play,Part parent)
-        {
-            AddPart<LobbyHomePart>();
-            AddPart<MenuPart>();
-            AddPart<SettingPart>();
-            
-            yield return base.OnCreating(this,this);
+        [Inject]
+        IOrderedMessenger<string> _orderedMessenger;
 
-            Messenger.Add(LobbyPlayMsgId.OnClickQuit,OnClickQuit);
-            OnCreatingComplate();
+        [Inject]
+        ILoadingUI _loadingUI;
+
+        protected override void OnPartInitialed()
+        {
+
+            addListener();
+
+            base.OnPartInitialed();
         }
 
-        private void OnCreatingComplate()
+        protected override void OnPartDestroy()
         {
-            GetPart<LobbyHomePart>().Show();
-            GetPart<MenuPart>().Show();
+            removeListener();
         }
 
-        protected override void OnDispose()
+        protected override void OnAllPartInitialed()
         {
-            base.OnDispose();
+            _loadingUI.Hide();
+        }
 
-            Messenger.Remove(LobbyPlayMsgId.OnClickQuit,OnClickQuit);
+        private void addListener()
+        {
+            _orderedMessenger.Add(LobbyPlayMsgId.OnClickQuit,OnClickQuit);
+        }
+
+        private void removeListener()
+        {
+            _orderedMessenger.Remove(LobbyPlayMsgId.OnClickQuit,OnClickQuit);
         }
 
         private void OnClickQuit()

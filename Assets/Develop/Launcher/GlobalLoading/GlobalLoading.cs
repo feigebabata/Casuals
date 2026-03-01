@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static FGUsing;
 
-public class GlobalLoading : MonoSingleton<GlobalLoading>
+public class GlobalLoading : MonoSingleton<GlobalLoading>,ILoadingUI
 {
     public Image Mask;
 

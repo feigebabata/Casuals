@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using FGUFW.MonoGameplay;
+using FGUFW.Gameplay;
 using UnityEngine;
 using FGUFW;
 using static FGUsing;
@@ -9,68 +9,71 @@ using System;
 
 namespace Skiing
 {
-    [UIPanelLoader("Assets/Develop/Skiing/MainPart/MainPartPanel.prefab",(int)UIPanelSortOrder.Base)]
     public partial class MainPart : Part
     {
-        private SkiingPlay _play;
+
+        [Inject(InjectField.UI)]
         private MainPartPanelComps _panelComps;
 
-        public override IEnumerator OnCreating(Part play,Part parent)
-        {
-            _play = play as SkiingPlay;
-            yield return base.OnCreating(play,parent);
-        }
+        [Inject]
+        IOrderedMessenger<string> _orderedMessenger;
 
-        public override IEnumerator OnPreload()
+        [Inject]
+        private ILoadingUI _loadingUI;
+
+        private SkiingLineTerrainComp _terrainComp;
+
+        protected override void OnPartInitialed()
         {
-            yield return base.OnPreload();
-            _panelComps = _uiPanel.Comp<MainPartPanelComps>();
             addListener();
+            
+            _terrainComp = findGO<SkiingLineTerrainComp>("Terrain");
+            Show();
         }
 
-        protected override void OnDispose()
+        protected override void OnPartDestroy()
         {
             removeListener();
-            base.OnDispose();
         }
+
 
         private void addListener()
         {
             _panelComps.TryAddAllBtnListener(this);
 
-            LobbyPlay.P.Messenger.Add(LobbyPlayMsgId.OnClickQuit,OnClickQuit,10);
+            _orderedMessenger.Add(LobbyPlayMsgId.OnClickQuit,OnClickQuit,10);
         }
 
         private void removeListener()
         {
             _panelComps.TryRemoveAllBtnListener();
 
-            LobbyPlay.P.Messenger.Remove(LobbyPlayMsgId.OnClickQuit,OnClickQuit);
+            _orderedMessenger.Remove(LobbyPlayMsgId.OnClickQuit,OnClickQuit);
         }
 
         public void Show()
         {
-            ShowPanel();
-            _play.TerrainComp.Step();
+            _panelComps.SetActive(true);
+            _terrainComp.Step();
         }
 
         public void Hide()
         {
-            HidePanel();
+            _panelComps.SetActive(false);
         }
 
         private void OnClickQuit()
         {
-            GlobalLoading.I.Show();
+            _loadingUI.Show();
             
-            LobbyPlay.P.Messenger.Abort(LobbyPlayMsgId.OnClickQuit);
-            _play.Destroy();
-            LobbyPlay.P.GetPart<LobbyHomePart>().Show();
+            _orderedMessenger.Abort(LobbyPlayMsgId.OnClickQuit);
+            // _play.Destroy();
+            // LobbyPlay.P.GetPart<LobbyHomePart>().Show();
         }
 
         void OnClickPlayBtn()
         {
-            HidePanel();
+            Hide();
 
             gameLoop().Start(this);
         }
@@ -80,10 +83,9 @@ namespace Skiing
             while (true)
             {
                 yield return new WaitForFixedUpdate();
-                _play.TerrainComp.Step();
+                _terrainComp.Step();
             }
         }
-
     }
 }
 

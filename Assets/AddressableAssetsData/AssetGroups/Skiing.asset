@@ -21,7 +21,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 555d1ce24df751a409212bfa2e5a7159
-    m_Address: Assets/Develop/Skiing/MainPart/MainPartPanel.prefab
+    m_Address: MainPartPanelComps
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

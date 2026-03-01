@@ -20,6 +20,7 @@ namespace ExcelConfig
             public string Description;
             public string Icon;
             public string Type;
+            public string ScenePath;
 
         }
 
