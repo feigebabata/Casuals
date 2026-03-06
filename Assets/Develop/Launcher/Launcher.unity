@@ -518,7 +518,7 @@ PrefabInstance:
       objectReference: {fileID: 3794938648828485168}
     - target: {fileID: 3280679027520199771, guid: 02db3596f89e08e419403f8c9fc892a2, type: 3}
       propertyPath: m_Name
-      value: GlobalPartInjector
+      value: GlobalPartDIContainer
       objectReference: {fileID: 0}
     - target: {fileID: 3874665176876913483, guid: 02db3596f89e08e419403f8c9fc892a2, type: 3}
       propertyPath: m_LocalPosition.x

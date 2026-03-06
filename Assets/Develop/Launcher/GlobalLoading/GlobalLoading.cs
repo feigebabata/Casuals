@@ -2,7 +2,6 @@ using System.Collections;
 using FGUFW;
 using UnityEngine;
 using UnityEngine.UI;
-using static FGUsing;
 
 public class GlobalLoading : MonoSingleton<GlobalLoading>,ILoadingUI
 {

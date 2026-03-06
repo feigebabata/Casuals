@@ -20,6 +20,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 30b83ade55ddefb4e9baffd45729f4d5
+    m_Address: Assets/ECJsonData/I18N.json
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: b69e5c8cd16a5d6449a26cce12baa1d3, type: 2}
   m_SchemaSet:

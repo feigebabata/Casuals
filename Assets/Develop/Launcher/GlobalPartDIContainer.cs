@@ -7,7 +7,7 @@ using FGUFW;
 using FGUFW.Gameplay;
 using UnityEngine;
 
-public class GlobalPartInjector : PartFieldInjector
+public class GlobalPartDIContainer : PartDIContainer
 {
     private IAssetLoader assetLoader = new Addressable_AssetLoader();
 
@@ -22,9 +22,9 @@ public class GlobalPartInjector : PartFieldInjector
 
     private void addDefaultFieldDatas()
     {
-        defaultFieldDatas.Add(typeof(IAssetLoader),assetLoader);
-        defaultFieldDatas.Add(typeof(IOrderedMessenger<string>),GlobalMessenger.M);
-        defaultFieldDatas.Add(typeof(ILoadingUI),Loading);
+        defaultDependency.Add(typeof(IAssetLoader),assetLoader);
+        defaultDependency.Add(typeof(IOrderedMessenger<string>),GlobalMessenger.M);
+        defaultDependency.Add(typeof(ILoadingUI),Loading);
 
         addConfigToDefault();
     }
@@ -36,23 +36,10 @@ public class GlobalPartInjector : PartFieldInjector
 
         foreach (FieldInfo f_info in configs.GetType().GetFields (BindingFlags.Instance | BindingFlags.Public  | BindingFlags.NonPublic))
         {
-            defaultFieldDatas.Add(f_info.FieldType,f_info.GetValue(configs));
+            defaultDependency.Add(f_info.FieldType,f_info.GetValue(configs));
         }
     }
 
-    protected override void injectSaveField(Part part, FieldInfo f_info)
-    {
-        var type = f_info.FieldType; 
-
-        if(!type.ContainsAttribute<SerializableAttribute>())
-        {
-            Debug.LogError($"{type.Name}必须添加特性[Serializable]");
-        }
-
-        var data = PartConfigUtility.Get(type);
-
-        f_info.SetValue(part,data);
-    }
 
     protected override async UniTask injectUIField(Part part, FieldInfo f_info, CancellationToken partTaskCancellationToken)
     {
@@ -71,4 +58,5 @@ public class GlobalPartInjector : PartFieldInjector
 
         f_info.SetValue(part,fieldData);
     }
+
 }

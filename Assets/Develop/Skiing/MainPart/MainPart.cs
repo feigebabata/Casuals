@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using FGUFW.Gameplay;
 using UnityEngine;
 using FGUFW;
-using static FGUsing;
 using Lobby;
 using System;
 
@@ -27,7 +26,7 @@ namespace Skiing
         {
             addListener();
             
-            _terrainComp = findGO<SkiingLineTerrainComp>("Terrain");
+            _terrainComp = FindFirstObjectByType<SkiingLineTerrainComp>();
             Show();
         }
 
@@ -40,15 +39,12 @@ namespace Skiing
         private void addListener()
         {
             _panelComps.TryAddAllBtnListener(this);
-
-            _orderedMessenger.Add(LobbyPlayMsgId.OnClickQuit,OnClickQuit,10);
         }
 
         private void removeListener()
         {
             _panelComps.TryRemoveAllBtnListener();
 
-            _orderedMessenger.Remove(LobbyPlayMsgId.OnClickQuit,OnClickQuit);
         }
 
         public void Show()
@@ -60,15 +56,6 @@ namespace Skiing
         public void Hide()
         {
             _panelComps.SetActive(false);
-        }
-
-        private void OnClickQuit()
-        {
-            _loadingUI.Show();
-            
-            _orderedMessenger.Abort(LobbyPlayMsgId.OnClickQuit);
-            // _play.Destroy();
-            // LobbyPlay.P.GetPart<LobbyHomePart>().Show();
         }
 
         void OnClickPlayBtn()

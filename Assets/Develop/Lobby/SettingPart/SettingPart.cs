@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using FGUFW.Gameplay;
 using UnityEngine;
 using FGUFW;
-using static FGUsing;
 
 namespace Lobby
 {

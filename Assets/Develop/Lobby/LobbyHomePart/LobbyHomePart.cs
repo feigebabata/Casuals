@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using FGUFW.Gameplay;
 using UnityEngine;
 using FGUFW;
-using static FGUsing;
 using System;
 using UnityEngine.UI;
 using Skiing;
@@ -24,6 +23,9 @@ namespace Lobby
         [Inject]
         IAssetLoader _assetLoader;
 
+        [Inject]
+        IOrderedMessenger<string> _orderedMessenger;
+
         protected override void OnPartInitialed()
         {
             addListener();
@@ -41,11 +43,20 @@ namespace Lobby
         private void addListener()
         {
             _panelComps.TryAddAllBtnListener(this);
+
+            _orderedMessenger.Add(LobbyPlayMsgId.OpenLobby,OnOpenLobby);
         }
 
         private void removeListener()
         {
             _panelComps.TryRemoveAllBtnListener();
+
+            _orderedMessenger.Remove(LobbyPlayMsgId.OpenLobby,OnOpenLobby);
+        }
+
+        private void OnOpenLobby()
+        {
+            Show();
         }
 
         void OnClickPlayBtn()

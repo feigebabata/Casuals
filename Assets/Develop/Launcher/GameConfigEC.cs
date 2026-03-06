@@ -11,7 +11,7 @@ namespace ExcelConfig
     {
 
 
-        public Table<string,SubGame> SubGames;
+        public Table<string,ExcelConfig.GameConfigEC.SubGame> SubGames;
         [Serializable]
         public class SubGame
         {
@@ -25,7 +25,7 @@ namespace ExcelConfig
         }
 
 
-        public Table<string,Item> Items;
+        public Table<string,ExcelConfig.GameConfigEC.Item> Items;
         [Serializable]
         public class Item
         {
@@ -37,7 +37,7 @@ namespace ExcelConfig
         }
 
 
-        public ItemType ItemTypeSingle;
+        public ExcelConfig.GameConfigEC.ItemType ItemTypeSingle;
         [Serializable]
         public class ItemType
         {
