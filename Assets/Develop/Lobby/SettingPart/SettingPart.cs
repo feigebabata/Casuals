@@ -22,6 +22,7 @@ namespace Lobby
         protected override void OnPartDestroy()
         {
             removeListener();
+            GameObject.Destroy(_panelComps.gameObject);
         }
 
         private void addListener()
@@ -40,12 +41,12 @@ namespace Lobby
 
         internal void Show()
         {
-            _panelComps.SetActive(true);
+            _panelComps.Show();
         }
 
         void OnClickCloseBtn()
         {
-            _panelComps.SetActive(false);
+            _panelComps.Hide();
         }
 
         void OnClickQuitBtn()

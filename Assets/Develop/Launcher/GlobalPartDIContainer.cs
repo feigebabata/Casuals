@@ -46,7 +46,7 @@ public class GlobalPartDIContainer : PartDIContainer
         var type = f_info.FieldType; 
         var key = type.Name;
 
-        var ui = await assetLoader.CopyAsync(key,default,partTaskCancellationToken);
+        var ui = await assetLoader.InstantiateAsync(key,default,partTaskCancellationToken);
         DontDestroyOnLoad(ui);
         ui.SetActive(false);
 

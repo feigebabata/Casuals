@@ -38,6 +38,7 @@ namespace Lobby
         protected override void OnPartDestroy()
         {
             removeListener();
+            GameObject.Destroy(_panelComps.gameObject);
         }
 
         private void addListener()
@@ -79,13 +80,13 @@ namespace Lobby
 
             GlobalLoading.I.Hide();
             
-            _panelComps.SetActive(true);
+            _panelComps.Show();
             resetGameListSelect();            
         }
 
         public void Hide()
         {
-            _panelComps.SetActive(false);
+            _panelComps.Hide();
             
         }
 

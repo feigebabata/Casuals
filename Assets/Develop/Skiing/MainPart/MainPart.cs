@@ -33,6 +33,7 @@ namespace Skiing
         protected override void OnPartDestroy()
         {
             removeListener();
+            GameObject.Destroy(_panelComps.gameObject);
         }
 
 
@@ -49,13 +50,13 @@ namespace Skiing
 
         public void Show()
         {
-            _panelComps.SetActive(true);
+            _panelComps.Show();
             _terrainComp.Step();
         }
 
         public void Hide()
         {
-            _panelComps.SetActive(false);
+            _panelComps.Hide();
         }
 
         void OnClickPlayBtn()
