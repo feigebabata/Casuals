@@ -33,7 +33,7 @@ namespace Skiing
         protected override void OnPartDestroy()
         {
             removeListener();
-            GameObject.Destroy(_panelComps.gameObject);
+            _panelComps.Release();
         }
 
 

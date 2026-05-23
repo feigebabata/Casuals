@@ -1,18 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using FGUFW;
 using FGUFW.Gameplay;
 using UnityEngine;
-using FGUFW;
 
-namespace Lobby
+namespace Skiing
 {
-    public partial class SettingPart : Part
+    public class GameOverPart : Part
     {
+        [Inject(InjectField.UI)]
+        private GameOverPartPanelComps _panelComps;
+
         [Inject]
         IOrderedMessenger<string> _orderedMessenger;
-
-        [Inject(InjectField.UI)]
-        private SettingPartPanelComps _panelComps;
+        private Action<bool> _callbacl;
 
         protected override void OnPartInitialed()
         {
@@ -29,31 +29,36 @@ namespace Lobby
         {
             _panelComps.TryAddAllBtnListener(this);
 
-            _orderedMessenger.Add(LobbyPlayMsgId.OpenSettingPart,Show);
+            _orderedMessenger.Add<Action<bool>>(Lobby.LobbyPlayMsgId.OpenGameOverPopup,OnOpenGameOverPopup);
         }
 
         private void removeListener()
         {
             _panelComps.TryRemoveAllBtnListener();
 
-            _orderedMessenger.Remove(LobbyPlayMsgId.OpenSettingPart,Show);
+            _orderedMessenger.Remove<Action<bool>>(Lobby.LobbyPlayMsgId.OpenGameOverPopup,OnOpenGameOverPopup);
         }
 
-        internal void Show()
+        private void OnOpenGameOverPopup(Action<bool> callback)
         {
             _panelComps.Show();
+
+            _callbacl = callback;
         }
 
-        void OnClickCloseBtn()
+        void OnClickRestartBtn()
         {
+            _callbacl(true);
+
             _panelComps.Hide();
         }
 
-        void OnClickQuitBtn()
+        void OnClickBackBtn()
         {
-            OnClickCloseBtn();
-            _orderedMessenger.Broadcast(LobbyPlayMsgId.OnClickQuit);
+            _callbacl(false);
+
+            _panelComps.Hide();
         }
+
     }
 }
-

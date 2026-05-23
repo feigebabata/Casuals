@@ -17,6 +17,7 @@ namespace ExcelConfig
         {
             public string Id;
             public string Name;
+            public bool Enabled;
             public string Description;
             public string Icon;
             public string Type;

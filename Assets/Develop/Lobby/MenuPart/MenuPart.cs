@@ -36,7 +36,7 @@ namespace Lobby
         protected override void OnPartDestroy()
         {
             removeListener();
-            GameObject.Destroy(_panelComps.gameObject);
+            _panelComps.Release();
         }
 
         private void addListener()
@@ -65,10 +65,11 @@ namespace Lobby
         {
             _panelComps.ItemList.Foreach<PointerClicker,ExcelConfig.GameConfigEC.Item>(_itemConfigs.Values,(comp,data)=>
             {
-                comp.GetChild<Image>(0).sprite = _assetLoader.Load<Sprite>(data.Icon);
-                comp.GetChild<Image>(0).SetSizeFlexibleHeight();
+                // comp.GetChild<Image>(0).sprite = _assetLoader.Load<Sprite>(data.Icon);
+                // comp.GetChild<Image>(0).SetSizeFlexibleHeight();
 
-                comp.GetChild<TMP_Text>(1).text = _lobbyPlayConfig.GetItemCount(data.Id).ts();
+                comp.GetChild<TMP_Text>("value").text = _lobbyPlayConfig.GetItemCount(data.Id).ts();
+                comp.GetChild<TMP_Text>("name").text = data.Name;
             });
         }
     }

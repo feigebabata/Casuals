@@ -6,6 +6,8 @@ using FGUFW;
 using System;
 using UnityEngine.UI;
 using Skiing;
+using TMPro;
+using System.Linq;
 
 namespace Lobby
 {
@@ -28,6 +30,11 @@ namespace Lobby
 
         protected override void OnPartInitialed()
         {
+            foreach (var k in _subGameConfigs.Where((kv=>!kv.Value.Enabled)).Select(kv=>kv.Key).ToList())
+            {
+                _subGameConfigs.Remove(k);
+            }
+
             addListener();
 
             generateGameList();
@@ -38,7 +45,7 @@ namespace Lobby
         protected override void OnPartDestroy()
         {
             removeListener();
-            GameObject.Destroy(_panelComps.gameObject);
+            _panelComps.Release();
         }
 
         private void addListener()
@@ -100,17 +107,22 @@ namespace Lobby
         {
             _panelComps.ItemListRoot.Foreach(_subGameConfigs.Values,(Action<PointerClicker, ExcelConfig.GameConfigEC.SubGame>)((comp,data)=>
             {
-                comp.GetChild(2).SetActive(_lobbyPlayConfig.SelectGameId == comp.Data.Get<string>());
+                comp.GetChild("select").SetActive(_lobbyPlayConfig.SelectGameId == comp.Data.Get<string>());
             }));
+            _panelComps.PlayBtn.interactable = !_lobbyPlayConfig.SelectGameId.IsNull();
+            _panelComps.PlayBtn.GetChild("disable").SetActive(_lobbyPlayConfig.SelectGameId.IsNull());
         }
 
         private void generateGameList()
         {
             _panelComps.ItemListRoot.Foreach<PointerClicker,ExcelConfig.GameConfigEC.SubGame>(_subGameConfigs.Values,(comp,data)=>
             {
+                comp.GetChild<TMP_Text>("name").text = data.Name;
+
                 comp.Data.Set(data.Id);
-                comp.GetChild<Image>(0).sprite = AssetHelper.Load<Sprite>(data.Icon);
                 comp.OnClick += OnClickGameItem;
+
+                comp.SetActive(data.Enabled);
             });
         }
     }

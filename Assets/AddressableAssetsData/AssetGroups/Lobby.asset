@@ -20,13 +20,18 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 05d5abfdda3a92d488daf357a545af55
+    m_Address: FailPartPanelComps
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0be40c8b169ce9943a2fd047b00eda14
     m_Address: LobbyHomePartPanelComps
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 15b0cee862ad44444ba4423220a26ca3
-    m_Address: Assets/Develop/Lobby/MenuPart/Sprite/gold.png
+  - m_GUID: 0db69668b81a5f44b8d6ede3ff1666c0
+    m_Address: GameOverPartPanelComps
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

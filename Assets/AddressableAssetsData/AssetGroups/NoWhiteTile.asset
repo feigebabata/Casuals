@@ -10,18 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Skiing
+  m_Name: NoWhiteTile
   m_EditorClassIdentifier: 
-  m_GroupName: Skiing
-  m_GUID: a44e91f18852860478ab0e2f2fe96248
+  m_GroupName: NoWhiteTile
+  m_GUID: 82e0aaae06c4b0442b22727136f84305
   m_SerializeEntries:
-  - m_GUID: 555d1ce24df751a409212bfa2e5a7159
-    m_Address: MainPartPanelComps
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a33cbc54287cc314d86d2108d5cc6bca
-    m_Address: Assets/Develop/Skiing/Skiing.unity
+  - m_GUID: 981d911d66e396a4a83c0248ee2ff141
+    m_Address: Assets/Develop/NoWhiteTile/NoWhiteTile.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -29,5 +24,5 @@ MonoBehaviour:
   m_Settings: {fileID: 11400000, guid: b69e5c8cd16a5d6449a26cce12baa1d3, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: fda6e5730a24a0142b09af22b3daccba, type: 2}
-    - {fileID: 11400000, guid: 1a768bfaf85200c428a38bd7aee9d86a, type: 2}
+    - {fileID: 11400000, guid: 54067796e4315e744b22d70c56109220, type: 2}
+    - {fileID: 11400000, guid: 8dcc42f5511ef6d4a9e6e315556197bb, type: 2}
